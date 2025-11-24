@@ -1,4 +1,4 @@
-export default function BooksDao(db) {
+export default function BooksShelfDao(db) {
     let { usershelves } = db;
 
     const createShelfEntry = (entry) => { /* ... */ };
