@@ -8,7 +8,7 @@ import BookShelfRoutes from "./Goodreads/BookShelf/routes.js";
 import BooksRoutes from './Goodreads/Books/routes.js';      
 import "dotenv/config";
 import session from "express-session";
-const CONNECTION_STRING = process.env.DATABASE_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
+const CONNECTION_STRING = process.env.DATABASE_CONNECTION_STRING || "mongodb://127.0.0.1:27017/goodreads"
 mongoose.connect(CONNECTION_STRING);
 const app = express()
 app.use(cors(
