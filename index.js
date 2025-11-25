@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from "cors";
+import mongoose from "mongoose";
 import SearchRoutes from './Goodreads/Search/routes.js';
 import db from "./Goodreads/Database/index.js";
 import UserRoutes from "./Goodreads/Users/routes.js";
@@ -7,7 +8,8 @@ import BookShelfRoutes from "./Goodreads/BookShelf/routes.js";
 import BooksRoutes from './Goodreads/Books/routes.js';      
 import "dotenv/config";
 import session from "express-session";
-
+const CONNECTION_STRING = process.env.DATABASE_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
+mongoose.connect(CONNECTION_STRING);
 const app = express()
 app.use(cors(
     {
