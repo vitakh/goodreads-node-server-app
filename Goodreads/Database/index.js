@@ -1,2 +1,6 @@
 import users from "./users.js";
-export default { users };
+import usershelves from "./usershelves.js";
+import books from "./books.js";
+    
+    
+export default { users, usershelves, books };

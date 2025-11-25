@@ -3,8 +3,11 @@ import cors from "cors";
 import SearchRoutes from './Goodreads/Search/routes.js';
 import db from "./Goodreads/Database/index.js";
 import UserRoutes from "./Goodreads/Users/routes.js";
+import BookShelfRoutes from "./Goodreads/BookShelf/routes.js";
+import BooksRoutes from './Goodreads/Books/routes.js';      
 import "dotenv/config";
 import session from "express-session";
+
 const app = express()
 app.use(cors(
     {
@@ -29,4 +32,10 @@ app.use(session(sessionOptions));
 app.use(express.json());
 UserRoutes(app, db);
 SearchRoutes(app);
-app.listen(process.env.PORT || 4000);
+BookShelfRoutes(app, db);
+BooksRoutes(app, db);
+const port = process.env.PORT || 4000;
+
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
+});
