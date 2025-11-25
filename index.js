@@ -30,7 +30,7 @@ if (process.env.SERVER_ENV !== "development") {
 }
 app.use(session(sessionOptions));
 app.use(express.json());
-UserRoutes(app, db);
+UserRoutes(app);
 SearchRoutes(app);
 BookShelfRoutes(app, db);
 BooksRoutes(app, db);
