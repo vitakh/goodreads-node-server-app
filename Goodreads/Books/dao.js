@@ -1,35 +1,26 @@
-export default function BooksDao(db) {
-    let { books } = db;
+import model from "./model.js";
+export default function BooksDao() {
+    const findAllBooks = () => model.find();
 
-    const findAllBooks = () => books;
-
-    const findBookById = (bookId) => books.find((book) => book._id === bookId);
-
-    const findBooksByAuthor = (authorId) =>
-        books.filter((book) => book.authorId === authorId);
+    const findSingleBookById = (bookId) => model.findById(bookId);
 
     const createBook = (book) => {
-        books = [...books, book];
-        db.books = books;
-        return book;
+        const newBook = { ...book};
+        return model.create(newBook);
     };
 
     const updateBook = (bookId, updates) => {
-        books = books.map((book) =>
-            book._id === bookId ? { ...book, ...updates } : book
-        );
-        db.books = books;
+        model.updateOne({ _id: bookId }, { $set: updates })
+
     };
 
     const deleteBook = (bookId) => {
-        books = books.filter((book) => book._id !== bookId);
-        db.books = books;
+        model.findByIdAndDelete( bookId )
     };
 
     return {
         findAllBooks,
-        findBookById,
-        findBooksByAuthor,
+        findSingleBookById,
         createBook,
         updateBook,
         deleteBook,

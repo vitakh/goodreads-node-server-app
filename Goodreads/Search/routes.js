@@ -22,6 +22,24 @@ export default function SearchRoutes(app) {
     }
   };
 
+  const getBookById = async (req, res) => {
+      const { id } = req.params;
+      if (!id) {
+          res.sendStatus(400);
+          return;
+      }
+
+      try {
+          const response = await axios.get(`${GOOGLE_BOOKS_API}/${id}`);
+          res.json(response.data);
+      } catch (error) {
+          console.error(error);
+          res.sendStatus(500);
+      }
+  };
+
   // for testing use http://localhost:4000/api/books/search?query=harry+potter
   app.get("/api/books/search", searchBooks);
+  app.get("/api/books/:id", getBookById);
+
 }
