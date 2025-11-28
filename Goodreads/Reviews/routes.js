@@ -47,6 +47,19 @@ export default function ReviewsRoutes(app) {
         res.json(reviews); 
     }
 
+    const findRecentReviews = async (req, res) => {
+        const reviews = await reviewDao.findRecentReviews();
+        res.json(reviews);
+    }
+
+    const findRecentReviewUser = async (req, res) => {
+        const authorId = req.query.authorId;
+        const reviews = await reviewDao.findRecentReviewUser(authorId);
+        res.json(reviews);
+    }
+
+    app.get("/api/reviews/user/recent", findRecentReviewUser);
+    app.get("/api/reviews/recent", findRecentReviews);
     app.post("/api/reviews", createReview);
     app.get("/api/reviews/:reviewId", findReviewById);
     app.get("/api/books/:bookId/reviews", findReviewsByBook);

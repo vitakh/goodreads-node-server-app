@@ -48,8 +48,22 @@ export default function BookShelfRoutes(app) {
         const deleted = await shelfDao.deleteShelfEntry(userId, bookId);
     };
 
+    const findRecentShelf = async (req, res) => {
+        const shelf = await shelfDao.findRecentShelf();
+        res.json(shelf);
+    }
+
+    const findRecentShelfUser = async (req, res) => {
+        const userId = req.query.userId;
+        const shelf = await shelfDao.findRecentShelfUser(userId);
+        res.json(shelf);
+    }
+
+    app.get("/api/bookshelf/user/recent", findRecentShelfUser);
+    app.get("/api/bookshelf/recent", findRecentShelf);
     app.get("/api/bookshelf", getAllBookshelves);
     app.delete("/api/bookshelf", removeShelfEntry);
     app.post("/api/bookshelf", createBookshelf);
     app.get("/api/bookshelf/user/:userId", getUserBookshelvesWithBooks);
+
 }
