@@ -14,6 +14,11 @@ export default function BooksShelfDao() {
     const deleteShelfEntry = (userId, bookId) => {
         return model.findOneAndDelete({userId, bookId});
     };
+    const findRecentShelf = () =>
+        model.find().populate("bookId", "title").populate("userId", "username").sort({ createdAt: -1 }).limit(5).exec();
+
+    const findRecentShelfUser = (userId) =>
+        model.find({userId: userId}).populate("bookId", "title").populate("userId", "username").sort({ createdAt: -1 }).limit(5).exec();
 
     return {
         createShelfEntry,
@@ -21,6 +26,8 @@ export default function BooksShelfDao() {
         findShelvesByUser,
         findShelvesByBook,
         updateShelfEntry,
-        deleteShelfEntry
+        deleteShelfEntry,
+        findRecentShelf,
+        findRecentShelfUser
     };
 }
