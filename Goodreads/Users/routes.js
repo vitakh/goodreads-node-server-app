@@ -60,13 +60,33 @@ export default function UserRoutes(app) {
         res.json(currentUser);
     };
 
+    const publicProfile = async (req, res) => {
+        const userId = req.params.userId;
+        const user = await dao.findUserById(userId);
+        if (!user) {
+            res.status(404).json({ message: "User not found" });
+            return;
+        }
+        // Return only public fields
+        const publicUser = {
+            _id: user._id,
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            role: user.role,
+            lastActivity: user.lastActivity
+        };
+        res.json(publicUser);
+    };
+
     app.post("/api/users", createUser);
     app.get("/api/users", findAllUsers);
-    app.get("/api/users/:userId", findUserById);
-    app.put("/api/users/:userId", updateUser);
-    app.delete("/api/users/:userId", deleteUser);
     app.post("/api/users/signup", signup);
     app.post("/api/users/signin", signin);
     app.post("/api/users/signout", signout);
     app.post("/api/users/profile", profile);
+    app.get("/api/users/profile/:userId", publicProfile);
+    app.get("/api/users/:userId", findUserById);
+    app.put("/api/users/:userId", updateUser);
+    app.delete("/api/users/:userId", deleteUser);
 }
