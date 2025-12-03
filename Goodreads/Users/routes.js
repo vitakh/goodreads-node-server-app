@@ -80,10 +80,25 @@ export default function UserRoutes(app) {
             firstName: user.firstName,
             lastName: user.lastName,
             role: user.role,
-            lastActivity: user.lastActivity
+            lastActivity: user.lastActivity,
+            authBooks: user.authBooks
         };
         res.json(publicUser);
     };
+
+    const updateAuthBooks = async (req, res) => {
+        const userId = req.params.userId;
+        const { book } = req.body;
+        await dao.updateAuthBooks(userId, book);
+        const updatedUser = await dao.findUserById(userId);
+        res.json(updatedUser);
+    }
+
+    const findAuthorByBookId = async (req, res) => {
+        const bookId = req.params.bookId;
+        const user = await dao.findAuthorByBookId(bookId);
+        res.json(user);
+    }
 
     app.post("/api/users", createUser);
     app.get("/api/users", findAllUsers);
@@ -95,4 +110,6 @@ export default function UserRoutes(app) {
     app.get("/api/users/:userId", findUserById);
     app.put("/api/users/:userId", updateUser);
     app.delete("/api/users/:userId", deleteUser);
+    app.put("/api/users/:userId/authBooks", updateAuthBooks);
+    app.get("/api/users/:bookId/author", findAuthorByBookId);
 }

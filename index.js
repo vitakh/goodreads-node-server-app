@@ -4,7 +4,8 @@ import mongoose from "mongoose";
 import SearchRoutes from './Goodreads/Search/routes.js';
 import UserRoutes from "./Goodreads/Users/routes.js";
 import BookShelfRoutes from "./Goodreads/BookShelf/routes.js";
-import BooksRoutes from './Goodreads/Books/routes.js';      
+import BooksRoutes from './Goodreads/Books/routes.js';
+import RequestRoutes from './Goodreads/Requests/routes.js';
 import "dotenv/config";
 import session from "express-session";
 import ReviewsRoutes from './Goodreads/Reviews/routes.js';
@@ -38,6 +39,7 @@ SearchRoutes(app);
 BookShelfRoutes(app);
 BooksRoutes(app);
 ReviewsRoutes(app);
+RequestRoutes(app);
 const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
