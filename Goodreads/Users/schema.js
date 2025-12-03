@@ -12,8 +12,14 @@ const userSchema = new mongoose.Schema({
             enum: ["AUTHOR", "ADMIN", "USER"],
             default: "USER",
         },
+        authBooks: {
+            type: [{
+                bookId: String,
+                title: String,
+            }],
+            default: [],
+        },
         loginId: String,
-        section: String,
         lastActivity: Date,
         totalActivity: String,
     },
