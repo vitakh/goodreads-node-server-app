@@ -4,7 +4,11 @@ const reviewsSchema = mongoose.Schema({
     _id: String,
     review: String,
     title: String,
-    bookId: String,
+    bookId:
+    {
+        type: String, 
+        ref: "BookModel"
+    },
     authorId: {
         type: String,
         ref: 'UserModel'
