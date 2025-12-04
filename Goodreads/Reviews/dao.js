@@ -30,9 +30,9 @@ export default function ReviewsDao() {
     const findReviewsByAuthor = (authorId) => model.find({authorId: authorId}).populate("authorId", "username").exec();
 
     const findRecentReviews = () =>
-        model.find().populate("authorId", "username").populate("bookId", "title").sort({ createdAt: -1 }).limit(5).exec();
+        model.find().populate("authorId", "username").sort({ createdAt: -1 }).limit(5).exec();
 
-    const findRecentReviewUser = (authorId) => model.find({authorId: authorId}).populate("authorId", "username").populate("bookId", "title").sort({ createdAt: -1 }).limit(5).exec();
+    const findRecentReviewUser = (authorId) => model.find({authorId: authorId}).populate("authorId", "username").sort({ createdAt: -1 }).limit(5).exec();
 
 
     return {

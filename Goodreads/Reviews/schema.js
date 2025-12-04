@@ -3,8 +3,9 @@ import mongoose from "mongoose";
 const reviewsSchema = mongoose.Schema({
     _id: String,
     review: String,
-    bookId: 
-    { 
+    title: String,
+    bookId:
+    {
         type: String, 
         ref: "BookModel"
     },
