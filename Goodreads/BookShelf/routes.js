@@ -46,6 +46,11 @@ export default function BookShelfRoutes(app) {
     const removeShelfEntry = async (req, res) => {
         const {userId, bookId} = req.body;
         const deleted = await shelfDao.deleteShelfEntry(userId, bookId);
+        if (deleted) {
+            res.json({ message: "Shelf entry removed" });
+        } else {
+            res.status(404).json({ error: "Shelf entry not found" });
+        }
     };
 
     const findRecentShelf = async (req, res) => {
