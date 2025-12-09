@@ -15,13 +15,6 @@ export default function BookShelfRoutes(app) {
         res.json(shelf);
     };
 
-    // GET /api/bookshelf/user/:userId - get shelves for a specific user
-    const getUserBookshelves = async (req, res) => {
-        const userId = req.params.userId;
-        const shelves = await shelfDao.findShelvesByUser(userId);
-        res.json(shelves);
-    };
-
     const getUserBookshelvesWithBooks = async (req, res) => {
         const userId = req.params.userId;
 

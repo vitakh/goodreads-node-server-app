@@ -6,11 +6,11 @@ export default function BooksShelfDao() {
         return model.create(newShelf);
     };
     const findAllShelves = () => model.find();
+    
     const findShelvesByUser = (userId) => {
         return model.find({userId: userId})
     };
-    const findShelvesByBook = (bookId) => { /* ... */ };
-    const updateShelfEntry = (entryId, updates) => { /* ... */ };
+
     const deleteShelfEntry = (userId, bookId) => {
         return model.findOneAndDelete({userId, bookId});
     };
@@ -24,8 +24,6 @@ export default function BooksShelfDao() {
         createShelfEntry,
         findAllShelves,
         findShelvesByUser,
-        findShelvesByBook,
-        updateShelfEntry,
         deleteShelfEntry,
         findRecentShelf,
         findRecentShelfUser
