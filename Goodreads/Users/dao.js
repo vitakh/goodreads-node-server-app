@@ -14,7 +14,7 @@ export default function UsersDao() {
     const updateAuthBooks = (userId, book) => model.updateOne({_id: userId}, {$push: {authBooks: book}});
     const deleteUser = (userId) => model.findByIdAndDelete( userId );
     const findAuthorByBookId = (bookId) =>
-        model.findOne({ "authBooks.bookId": bookId });
+        model.find({ "authBooks.bookId": bookId });
     return {
         createUser, findAllUsers, findUserById, findUserByUsername, findUserByCredentials, updateUser, deleteUser, updateAuthBooks, findAuthorByBookId };
 }
