@@ -13,7 +13,12 @@ export default function SearchRoutes(app) {
 
     try {
       const response = await axios.get(GOOGLE_BOOKS_API, {
-        params: {q: query, startIndex: Number(startIndex), maxResults: Number(maxResults)},
+        params: {
+          q: query,
+          startIndex: Number(startIndex),
+          maxResults: Number(maxResults),
+          key: process.env.GOOGLE_BOOKS_API_KEY
+        },
       });
       res.json(response.data);
     } catch (error) {
@@ -30,7 +35,11 @@ export default function SearchRoutes(app) {
       }
 
       try {
-          const response = await axios.get(`${GOOGLE_BOOKS_API}/${id}`);
+          const response = await axios.get(`${GOOGLE_BOOKS_API}/${id}`, {
+            params: {
+              key: process.env.GOOGLE_BOOKS_API_KEY
+            }
+          });
           res.json(response.data);
       } catch (error) {
           console.error(error);
